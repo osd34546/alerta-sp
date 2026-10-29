@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#13241f">
+<meta name="description" content="Alerta SP: monitoramento simulado do nível da água e do risco de alagamento na Grande São Paulo, com mapa de bairros e cidades.">
+<title>Alerta SP · Monitoramento de alagamentos</title>
+<link rel="icon" href="./favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<link rel="stylesheet" href="./styles.css">
+<script src="./assets/js/theme.js"></script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="logo" viewBox="0 0 40 40"><rect width="40" height="40" rx="8" fill="#13241f"/><g fill="#f2b705"><rect x="9" y="6" width="7" height="5"/><rect x="9" y="16" width="7" height="5"/><rect x="9" y="26" width="7" height="5"/></g><g fill="#e7ebe6"><rect x="9" y="11" width="7" height="5"/><rect x="9" y="21" width="7" height="5"/></g><path d="M3 22c3.2-3 6.4-3 9.6 0s6.400 3 9.600 0 6.400-3 9.600 0 3.200 1.500 4.200 1V32a8 8 0 0 1-8 8H11a8 8 0 0 1-8-8Z" fill="#3b8fa8" opacity=".92"/><path d="M3 22c3.200-3 6.400-3 9.600 0s6.400 3 9.600 0 6.400-3 9.600 0" fill="none" stroke="#bfe6ee" stroke-width="1.6" stroke-linecap="round"/><g stroke="#13241f" stroke-width="1.4"><path d="M9 11h3M9 16h5M9 21h3M9 26h5"/></g></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6.100 7-11.500A7 7 0 0 0 5 9.500C5 14.900 12 21 12 21Z" fill="none" stroke="currentColor" stroke-width="1.800" stroke-linejoin="round"/><circle cx="12" cy="9.500" r="2.400" fill="none" stroke="currentColor" stroke-width="1.800"/></symbol>
+    <symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 21V4m0 1h12l-2.500 4L17 13H5" fill="none" stroke="currentColor" stroke-width="1.800" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.800"/><path d="M12 11v6M12 7.500v.1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.500A8 8 0 0 1 9.500 4 8 8 0 1 0 20 14.500Z" fill="none" stroke="currentColor" stroke-width="1.800" stroke-linejoin="round"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.800"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.600 5.600 7 7M17 17l1.400 1.400M5.600 18.400 7 17M17 7l1.400-1.400" stroke="currentColor" stroke-width="1.800" stroke-linecap="round"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-fit" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="1.800" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.500v13l11-6.500Z" fill="currentColor"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5h3v14H8zM13 5h3v14h-3z" fill="currentColor"/></symbol>
+    <symbol id="i-stop" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="1.500" fill="currentColor"/></symbol>
+    <symbol id="i-reset" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.600-5.900M4 4v4.500h4.500" fill="none" stroke="currentColor" stroke-width="1.800" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-rain" viewBox="0 0 24 24"><path d="M7 15a4.500 4.500 0 0 1-.4-9A6 6 0 0 1 18 7.500a3.800 3.800 0 0 1-.5 7.500" fill="none" stroke="currentColor" stroke-width="1.800" stroke-linecap="round"/><path d="m8 18-1 3m5-3-1 3m5-3-1 3" stroke="currentColor" stroke-width="1.800" stroke-linecap="round"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24"><path d="m13 3-8 11h6l-1 7 8-11h-6Z" fill="none" stroke="currentColor" stroke-width="1.800" stroke-linejoin="round"/></symbol>
+    <symbol id="i-off" viewBox="0 0 24 24"><path d="M3 3l18 18M8.500 8.500A8 8 0 0 0 4 12m4 3a5 5 0 0 1 3-1.700M16 12.800A8 8 0 0 0 12.500 11M12 19v.1" fill="none" stroke="currentColor" stroke-width="1.800" stroke-linecap="round"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 4 2.500 20h19Z" fill="none" stroke="currentColor" stroke-width="1.800" stroke-linejoin="round"/><path d="M12 10v4.500M12 17.500v.1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-ok" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.800"/><path d="m8 12.500 3 3 5-6" fill="none" stroke="currentColor" stroke-width="1.800" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 19V5m-6 6 6-6 6 6" fill="none" stroke="currentColor" stroke-width="1.800" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18" stroke="currentColor" stroke-width="1.800" stroke-linecap="round"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.500" fill="none" stroke="currentColor" stroke-width="1.800"/><path d="m16 16 4.500 4.500" stroke="currentColor" stroke-width="1.800" stroke-linecap="round"/></symbol>
+    <symbol id="i-sensor" viewBox="0 0 24 24"><path d="M9 3h6v18H9z" fill="none" stroke="currentColor" stroke-width="1.800" stroke-linejoin="round"/><path d="M9 7h3M9 11h3M9 15h3" stroke="currentColor" stroke-width="1.800"/><path d="M3 16c2-1.500 3.500-1.500 5 0M16 16c1.500-1.500 3-1.500 5 0" fill="none" stroke="currentColor" stroke-width="1.800" stroke-linecap="round"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 4v16h16M8 15l3.500-4 3 2.500L19 8" fill="none" stroke="currentColor" stroke-width="1.800" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.200" fill="none" stroke="currentColor" stroke-width="1.800"/><path d="M3 20a6 6 0 0 1 12 0M16 5.200a3.200 3.200 0 0 1 0 5.600M18 14.300a6 6 0 0 1 3 5.700" fill="none" stroke="currentColor" stroke-width="1.800" stroke-linecap="round"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 17V11a6 6 0 0 1 12 0v6l1.500 2h-15ZM10 21h4" fill="none" stroke="currentColor" stroke-width="1.800" stroke-linejoin="round" stroke-linecap="round"/></symbol>
+  </defs>
+</svg>
+
+<a class="skip" href="#principal">Ir para o conteúdo</a>
+
+<header class="top">
+  <a class="brand" href="#monitoramento" aria-label="Alerta SP, início">
+    <svg class="logo" width="38" height="38" aria-hidden="true"><use href="#logo"/></svg>
+    <span class="wm"><b>Alerta SP</b><small>Rede AquaSentinela</small></span>
+  </a>
+  <nav class="tabs" aria-label="Seções do site">
+    <a class="tab active" id="monitor-tab" href="#monitoramento" aria-current="page"><svg aria-hidden="true"><use href="#i-pin"/></svg><span>Monitoramento</span></a>
+    <a class="tab" id="report-tab" href="#reportar"><svg aria-hidden="true"><use href="#i-flag"/></svg><span>Reportar</span></a>
+    <a class="tab" id="about-tab" href="#sobre"><svg aria-hidden="true"><use href="#i-info"/></svg><span>Sobre nós</span></a>
+  </nav>
+  <div class="top-actions">
+    <span class="demo-tag" title="Nenhum sensor físico está conectado: todos os valores são de demonstração ou ajustados por você.">Dados de demonstração</span>
+    <button class="icon-btn" id="theme" type="button" aria-label="Alternar entre tema claro e escuro"><svg aria-hidden="true"><use href="#i-moon"/></svg></button>
+  </div>
+</header>
+
+<div class="situation" id="situation" role="status" aria-live="polite">
+  <div class="sit-text"><strong id="sit-title">Carregando situação…</strong><span id="sit-sub"></span></div>
+  <div class="sit-bar" id="sit-bar" aria-hidden="true"></div>
+  <ul class="sit-count" id="counters" aria-label="Sensores por situação"></ul>
+</div>
+
+<main id="principal">
+<!-- ======================= MONITORAMENTO ======================= -->
+<div class="monitor" id="monitoring-panel" role="tabpanel" aria-labelledby="monitor-tab">
+  <section class="map-card" id="map-card" aria-label="Mapa">
+    <div class="map" id="map"></div>
+    <div class="fx-layer" id="fx" aria-hidden="true"></div>
+
+    <div class="map-tools">
+      <div class="search">
+        <label class="sr-only" for="search">Buscar sensor, bairro ou cidade</label>
+        <svg aria-hidden="true"><use href="#i-search"/></svg>
+        <input id="search" type="search" placeholder="Buscar bairro, cidade ou sensor" autocomplete="off" role="combobox" aria-autocomplete="list" aria-controls="results" aria-expanded="false" enterkeyhint="search">
+        <ul class="results" id="results" role="listbox" hidden></ul>
+      </div>
+    </div>
+
+    <div class="map-ctl" id="map-ctl" role="group" aria-label="Controles do mapa">
+      <button type="button" data-map="in" aria-label="Aproximar"><svg aria-hidden="true"><use href="#i-plus"/></svg></button>
+      <button type="button" data-map="out" aria-label="Afastar"><svg aria-hidden="true"><use href="#i-minus"/></svg></button>
+      <button type="button" data-map="reset" aria-label="Ver toda a capital"><svg aria-hidden="true"><use href="#i-fit"/></svg></button>
+    </div>
+
+    <div class="map-weather" id="map-weather" hidden><svg aria-hidden="true"><use href="#i-rain"/></svg><span id="map-weather-text"></span></div>
+
+    <button type="button" class="sel-chip" id="sel-chip" aria-label="Ver detalhes do sensor selecionado">
+      <i class="sel-dot" id="sel-dot"></i><span class="sel-name" id="sel-name">—</span><span class="sel-val" id="sel-val"></span>
+    </button>
+
+    <div class="map-foot">
+      <ul class="legend" aria-label="Legenda das cores">
+        <li><i class="lg normal"></i>Normal</li><li><i class="lg attention"></i>Atenção</li><li><i class="lg risk"></i>Risco</li><li><i class="lg flood"></i>Alagamento</li><li><i class="lg offline"></i>Sem sinal</li>
+      </ul>
+      <div class="scale" id="scale" aria-hidden="true"></div>
+    </div>
+    <p class="map-note">Mapa esquemático: limites aproximados, sem valor oficial.</p>
+  </section>
+
+  <aside class="panel" id="panel" aria-label="Painel do sensor e da simulação">
+    <!-- Sensor -->
+    <section class="sec sensor" id="sec-sensor" aria-labelledby="h-sensor">
+      <header class="sec-h"><h2 id="h-sensor">Sensor selecionado</h2></header>
+      <div class="s-head">
+        <div><h3 id="sensor-name">—</h3><p class="muted" id="sensor-meta">—</p></div>
+        <span class="badge" id="sensor-badge" data-level="normal">—</span>
+      </div>
+      <div class="s-body">
+        <div class="gauge" id="gauge" aria-hidden="true"></div>
+        <div class="s-read">
+          <div class="big" aria-live="off"><output id="level-out" for="level">0</output><span class="u">cm</span></div>
+          <p class="s-text" id="sensor-text"></p>
+          <dl class="facts">
+            <div><dt>Origem do dado</dt><dd id="f-source">—</dd></div>
+            <div><dt>Chuva no ponto</dt><dd id="f-rain">—</dd></div>
+            <div><dt>Variação</dt><dd id="f-rate">—</dd></div>
+            <div><dt>Última mudança</dt><dd id="f-last">—</dd></div>
+          </dl>
+        </div>
+      </div>
+
+      <div class="adjust">
+        <div class="adjust-h"><label for="level">Ajuste manual do nível</label><span class="muted">Simulação: não é uma medição física.</span></div>
+        <div class="stepper">
+          <button type="button" class="step" data-step="-5" aria-label="Diminuir 5 centímetros">−5</button>
+          <button type="button" class="step" data-step="-1" aria-label="Diminuir 1 centímetro">−1</button>
+          <div class="range">
+            <input id="level" type="range" min="0" max="150" step="1" value="0" aria-valuetext="0 centímetros">
+            <div class="range-scale" aria-hidden="true"><span style="left:0%">0</span><span style="left:20%">30</span><span style="left:40%">60</span><span style="left:60%">90</span><span style="left:100%">150</span></div>
+          </div>
+          <button type="button" class="step" data-step="1" aria-label="Aumentar 1 centímetro">+1</button>
+          <button type="button" class="step" data-step="5" aria-label="Aumentar 5 centímetros">+5</button>
+        </div>
+        <div class="adjust-actions">
+          <button type="button" class="btn quiet" id="level-reset"><svg aria-hidden="true"><use href="#i-reset"/></svg>Voltar ao valor inicial</button>
+          <button type="button" class="btn quiet" id="offline-toggle" aria-pressed="false"><svg aria-hidden="true"><use href="#i-off"/></svg><span>Simular falha de sinal</span></button>
+        </div>
+      </div>
+
+      <details class="more" id="more">
+        <summary><svg aria-hidden="true"><use href="#i-chart"/></svg>Gráfico e últimas leituras</summary>
+        <div id="chart" class="chart"></div>
+        <div id="readings" class="table-wrap"></div>
+      </details>
+    </section>
+
+    <!-- Simulação -->
+    <section class="sec sim" id="sec-sim" aria-labelledby="h-sim">
+      <header class="sec-h"><h2 id="h-sim">Simulação de chuva</h2><span class="pill" id="sim-state" data-state="stopped">Parada</span></header>
+      <p class="muted" id="sim-hint">Escolha um sensor e inicie para ver o nível subir com a chuva.</p>
+      <div class="sim-target"><svg aria-hidden="true"><use href="#i-sensor"/></svg><span id="sim-sensor">—</span></div>
+      <div class="sim-main">
+        <button type="button" class="btn primary" id="demo"><svg aria-hidden="true"><use href="#i-play"/></svg><span>Iniciar simulação</span></button>
+        <button type="button" class="btn" id="sim-stop" disabled><svg aria-hidden="true"><use href="#i-stop"/></svg><span>Encerrar</span></button>
+      </div>
+      <div class="seg" role="radiogroup" aria-label="Intensidade da chuva">
+        <button type="button" role="radio" aria-checked="false" data-rain="8"><b>Leve</b><small>8 mm/h</small></button>
+        <button type="button" role="radio" aria-checked="false" data-rain="45"><b>Forte</b><small>45 mm/h</small></button>
+        <button type="button" role="radio" aria-checked="true" data-rain="55"><b>Temporal</b><small>55 mm/h</small></button>
+      </div>
+      <div class="scen" role="group" aria-label="Cenários rápidos (só durante a simulação)">
+        <button type="button" class="btn small" data-action="raise" disabled><svg aria-hidden="true"><use href="#i-up"/></svg>Subir 15 cm</button>
+        <button type="button" class="btn small" data-action="flood" disabled><svg aria-hidden="true"><use href="#i-alert"/></svg>Alagar (105 cm)</button>
+        <button type="button" class="btn small" data-action="normal" disabled><svg aria-hidden="true"><use href="#i-ok"/></svg>Normalizar</button>
+      </div>
+      <div class="fx-row"><span class="muted" id="fx-text">Efeitos visuais completos</span><button type="button" class="btn quiet small" id="fx-toggle" aria-pressed="false">Reduzir efeitos</button></div>
+    </section>
+
+    <!-- Rede -->
+    <section class="sec net" aria-labelledby="h-net">
+      <header class="sec-h"><h2 id="h-net">Sensores da rede</h2><span class="muted" id="net-count"></span></header>
+      <ul class="net-list" id="regions-risk-list"></ul>
+    </section>
+
+    <!-- Alertas -->
+    <section class="sec alerts" aria-labelledby="h-alerts">
+      <header class="sec-h"><h2 id="h-alerts">Alertas recentes</h2><button type="button" class="btn quiet small" id="alerts-clear" hidden>Limpar</button></header>
+      <ol class="alert-list" id="alerts"><li class="empty">Nenhum alerta ainda. Inicie a simulação ou mova o nível para ver os avisos aqui.</li></ol>
+      <p class="fine">O nível de um sensor não é previsão do tempo nem confirma que uma rua está alagada.</p>
+    </section>
+  </aside>
+</div>
+
+<!-- ======================= REPORTAR ======================= -->
+<section class="page" id="report-panel" role="tabpanel" aria-labelledby="report-tab" hidden>
+  <div class="page-grid">
+    <div class="page-intro">
+      <h2>Reportar ocorrência</h2>
+      <p>Viu água subindo, rua bloqueada ou árvore caída? Conte o que está acontecendo. O relato aparece na lista ao lado para outras pessoas.</p>
+      <p class="fine">Em emergência, ligue 199 (Defesa Civil) ou 193 (Bombeiros). Este formulário não substitui o atendimento de emergência.</p>
+    </div>
+    <div class="page-main">
+      <form id="report-form" class="form" novalidate>
+        <div class="form-grid">
+          <label>Tipo de ocorrência
+            <select id="report-type" required><option value="">Selecione uma opção</option><option>Alagamento</option><option>Via obstruída</option><option>Queda de árvore</option><option>Deslizamento</option><option>Enxurrada</option><option>Outro desastre natural</option></select>
+          </label>
+          <label>Gravidade
+            <select id="report-severity" required><option value="">Selecione uma opção</option><option>Baixa — situação controlada</option><option>Média — dificulta a passagem</option><option>Alta — risco para pessoas</option><option>Crítica — emergência imediata</option></select>
+          </label>
+          <label class="wide">Localização
+            <input id="report-location" type="text" placeholder="Ex.: Av. Aricanduva, 1200 — São Paulo" required maxlength="120" autocomplete="street-address">
+          </label>
+          <label class="wide">Descrição
+            <textarea id="report-description" rows="4" placeholder="O que está acontecendo, como está a via e se há pessoas em risco." required maxlength="500"></textarea>
+            <small class="field-help">Não inclua dados pessoais de outras pessoas.</small>
+          </label>
+        </div>
+        <div class="form-foot">
+          <label class="check"><input id="report-anonymous" type="checkbox" checked> Enviar como relato anônimo</label>
+          <button class="btn primary" type="submit">Enviar ocorrência</button>
+        </div>
+        <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+      </form>
+      <div class="received">
+        <header class="sec-h"><h3>Relatos recebidos</h3></header>
+        <div id="submitted-reports" class="submitted-reports"><p class="empty">Nenhuma ocorrência enviada ainda.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= SOBRE ======================= -->
+<section class="page about" id="about-panel" role="tabpanel" aria-labelledby="about-tab" hidden>
+  <div class="about-hero">
+    <p class="kicker">Vila Guardiã · AquaSentinela Tecnologia</p>
+    <h2>Monitorar para proteger.</h2>
+    <p class="lead">Tecnologia comunitária para antecipar alagamentos, proteger vidas e fortalecer a resiliência das cidades.</p>
+    <p class="muted">Projeto de extensão em empreendedorismo · UNINOVE · São Paulo, 2026</p>
+  </div>
+
+  <div class="about-cols">
+    <article>
+      <h3>De uma falha de cobertura a uma rede de proteção</h3>
+      <p>A Vila Guardiã / AquaSentinela nasceu para atender à demanda por soluções acessíveis e eficientes de monitoramento e prevenção de alagamentos em áreas urbanas vulneráveis. A ideia surgiu ao identificar lacunas na cobertura dos sistemas tradicionais e a necessidade de democratizar o acesso a dados ambientais decisivos.</p>
+      <aside class="callout"><strong>Ponto de partida</strong><span>O Jardim Pantanal, no distrito do Jardim Helena, Zona Leste de São Paulo, é o foco das operações piloto. Às margens do Rio Tietê, a região enfrenta enchentes severas e recorrentes.</span></aside>
+    </article>
+    <article>
+      <h3>Como a solução foi construída</h3>
+      <ol class="timeline">
+        <li><b>Diagnóstico</b><span>Identificação das lacunas e atrasos nos alertas em áreas de várzea e periferias vulneráveis.</span></li>
+        <li><b>Desenvolvimento</b><span>Rede de sensores físicos de baixo custo, IoT e plataforma web interativa em tempo real.</span></li>
+        <li><b>Validação</b><span>Testes práticos de eficácia e confiabilidade em cenários comunitários críticos.</span></li>
+      </ol>
+    </article>
+  </div>
+
+  <div class="mvv">
+    <div><h3>Missão</h3><p>Desenvolver soluções inteligentes de alta precisão para prevenir alagamentos, salvar vidas, proteger patrimônios e promover resiliência climática.</p></div>
+    <div><h3>Visão</h3><p>Tornar-se, até 2030, referência nacional em tecnologia comunitária de gestão de riscos climáticos urbanos.</p></div>
+    <div><h3>Valores</h3><p>Inclusão e impacto social, inovação aplicada, transparência, compromisso com a vida, segurança e sustentabilidade.</p></div>
+  </div>
+
+  <div class="about-solutions">
+    <h3>O que a plataforma faz</h3>
+    <ul>
+      <li><svg aria-hidden="true"><use href="#i-sensor"/></svg><div><b>Sensores de nível</b><span>Medição do nível da água em tempo real nas vias críticas.</span></div></li>
+      <li><svg aria-hidden="true"><use href="#i-pin"/></svg><div><b>Mapa de risco</b><span>Pontos monitorados classificados por nível de segurança.</span></div></li>
+      <li><svg aria-hidden="true"><use href="#i-bell"/></svg><div><b>Alertas instantâneos</b><span>Avisos rápidos quando a água ultrapassa limites seguros.</span></div></li>
+      <li><svg aria-hidden="true"><use href="#i-chart"/></svg><div><b>Histórico de medições</b><span>Acompanhamento da evolução de cada sensor.</span></div></li>
+      <li><svg aria-hidden="true"><use href="#i-flag"/></svg><div><b>Registro de ocorrências</b><span>Canal colaborativo para relatos da comunidade.</span></div></li>
+    </ul>
+  </div>
+
+  <div class="about-team">
+    <h3>Equipe de desenvolvimento</h3>
+    <p class="muted">Estudantes e pesquisadores responsáveis pelo desenvolvimento de ponta a ponta do projeto Vila Guardiã / AquaSentinela.</p>
+    <ul>
+      <li>Agleiciane Fontenele dos Santos</li><li>André Victor dos Passos Ferreira</li><li>Antônio José de Farias</li><li>Bruna Guergui da Silva</li><li>Guilherme de Almeida Cruz</li><li>Levi dos Santos</li><li>Lucas Cristino de Moura da Silva Benedito</li><li>Lucas Giraldi Cardoso</li><li>Luiz Fernando Garcia Custódio</li><li>Mateus Eduardo Lisboa da Silva</li><li>Pedro Augusto Silva Rodrigues</li><li>Thiago de Jesus Maia</li><li>Yago Andrade Alves</li>
+    </ul>
+  </div>
+</section>
+</main>
+
+<div class="toasts" id="toasts" aria-live="polite" aria-atomic="false"></div>
+
+<script src="./assets/data/sp-geo.js"></script>
+<script src="./assets/js/core.js"></script>
+<script src="./assets/js/map.js"></script>
+<script src="./assets/js/weather.js"></script>
+<script src="./script.js"></script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "name": "alerta-sp",
+  "version": "2.0.0",
+  "description": "Alerta SP — monitoramento simulado de alagamentos na Grande São Paulo (projeto de extensão UNINOVE)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test tests/core.test.js",
+    "geo": "node tools/build-geo.mjs"
+  },
+  "engines": { "node": ">=18" },
+  "license": "UNLICENSED",
+  "private": true
+}

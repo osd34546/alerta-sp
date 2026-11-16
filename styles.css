@@ -233,7 +233,13 @@ main { display: block; }
 .timeline { counter-reset: t; display: flex; flex-direction: column; } .timeline li { counter-increment: t; position: relative; padding: 0 0 18px 48px; } .timeline li::before { content: counter(t); position: absolute; left: 0; top: 0; width: 32px; height: 32px; display: grid; place-items: center; background: var(--brand); color: var(--signal); font: 700 18px var(--font-d); border-radius: 4px; } .timeline li::after { content: ""; position: absolute; left: 15px; top: 36px; bottom: 4px; width: 2px; background: var(--line-2); } .timeline li:last-child::after { display: none; } .timeline b { display: block; font-size: 16px; } .timeline span { color: var(--ink-2); font-size: 14px; }
 .mvv { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--line-2); background: var(--paper); margin-bottom: 36px; } .mvv > div { padding: 20px; border-right: 1px solid var(--line-2); } .mvv > div:last-child { border-right: 0; }
 .about-solutions ul { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 12px; margin-bottom: 36px; } .about-solutions li { display: flex; gap: 12px; padding: 14px; background: var(--paper); border: 1px solid var(--line); border-radius: 8px; } .about-solutions svg { width: 26px; height: 26px; flex: none; stroke: var(--water); } .about-solutions b { display: block; } .about-solutions span { font-size: 13.5px; color: var(--ink-2); }
-.about-team ul { margin-top: 14px; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 0 24px; } .about-team li { padding: 9px 0; border-bottom: 1px solid var(--line); font-weight: 500; }
+.about-team { margin-top: 8px; }
+.about-team > .muted { max-width: 820px; margin-bottom: 22px; }
+.team-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 18px; }
+.team-card { min-width: 0; overflow: hidden; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; box-shadow: var(--shadow); }
+.team-card img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center; background: var(--line); }
+.team-card h4 { padding: 13px 14px 15px; font: 700 16px/1.15 var(--font-d); color: var(--ink); }
+.team-note { margin-top: 22px; padding: 13px 15px; border-left: 4px solid var(--signal); background: var(--paper); color: var(--ink-2); font-size: 14px; }
 
 /* ---------- responsivo ---------- */
 @media (max-width: 1180px) { .monitor { grid-template-columns: minmax(0, 1fr) 380px; } .demo-tag { display: none; } }

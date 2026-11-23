@@ -40,7 +40,7 @@ svg { fill: none; }
 /* ---------- topo ---------- */
 .top { height: var(--head-h); display: flex; align-items: center; gap: 18px; padding: 0 clamp(12px, 2.4vw, 28px); background: var(--brand); color: #F4F1DE; position: sticky; top: 0; z-index: 50; border-bottom: 3px solid var(--signal); }
 .brand { display: flex; align-items: center; gap: 11px; color: inherit; text-decoration: none; flex: none; }
-.logo { width: 38px; height: 38px; flex: none; }
+.logo-img { width: 54px; height: 54px; flex: none; object-fit: cover; object-position: center; border-radius: 8px; background: #000; }
 .wm { display: flex; flex-direction: column; line-height: 1; } .wm b { font: 700 24px/1 var(--font-d); letter-spacing: .02em; text-transform: uppercase; } .wm small { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: #778D7A; margin-top: 3px; }
 .tabs { display: flex; gap: 4px; margin-left: 10px; }
 .tab { display: flex; align-items: center; gap: 8px; padding: 9px 14px; color: #D4C4A8; text-decoration: none; font-weight: 600; font-size: 14px; border-radius: 7px; position: relative; }

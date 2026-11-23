@@ -1,1 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><rect width="40" height="40" rx="8" fill="#0D1B2A"/><g fill="#D4C4A8"><rect x="9" y="6" width="7" height="5"/><rect x="9" y="16" width="7" height="5"/><rect x="9" y="26" width="7" height="5"/></g><g fill="#F4F1DE"><rect x="9" y="11" width="7" height="5"/><rect x="9" y="21" width="7" height="5"/></g><path d="M3 22c3.2-3 6.4-3 9.6 0s6.4 3 9.6 0 6.4-3 9.6 0 3.2 1.5 4.2 1V32a8 8 0 0 1-8 8H11a8 8 0 0 1-8-8Z" fill="#415A77" opacity=".92"/><path d="M3 22c3.2-3 6.4-3 9.6 0s6.4 3 9.6 0 6.4-3 9.6 0" fill="none" stroke="#778D7A" stroke-width="1.6" stroke-linecap="round"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">Aqua Sentinela</title>
+  <desc id="desc">Símbolo minimalista de ondas de água em uma base azul-marinho</desc>
+  <rect width="64" height="64" rx="14" fill="#1B263B"/>
+  <path d="M13 25c7-12 24-17 37-8" fill="none" stroke="#D4C4A8" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M11 35c8-9 16-11 24-5 8 6 12 7 18 1-4 8-12 12-21 7-7-4-12-4-21 4Z" fill="#F4F1DE"/>
+  <path d="M10 44c8-8 16-9 24-4 7 5 13 5 20-1-5 9-14 12-23 7-7-4-12-3-21 5Z" fill="#778D7A"/>
+  <path d="M14 47c6 9 19 13 30 7" fill="none" stroke="#415A77" stroke-width="2" stroke-linecap="round"/>
+</svg>

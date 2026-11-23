@@ -2,7 +2,7 @@
 :root {
   --bg: #F4F1DE; --paper: #D4C4A8; --paper-2: #778D7A; --ink: #0D1B2A; --ink-2: #1B263B; --ink-3: #415A77;
   --line: #778D7A; --line-2: #415A77; --brand: #0D1B2A; --signal: #D4C4A8; --water: #415A77; --water-2: #778D7A;
-  --normal: #778D7A; --attention: #D4C4A8; --risk: #415A77; --flood: #1B263B; --offline: #778D7A;
+  --normal: #2E8B57; --attention: #E0A800; --risk: #E56B2F; --flood: #C0392B; --offline: #7F8C8D;
   --on-signal: #0D1B2A;
   --map-sea: #F4F1DE; --map-muni: #D4C4A8; --map-cap: #D4C4A8; --map-line: #778D7A; --map-lbl: #0D1B2A; --map-halo: #F4F1DE; --map-water: #778D7A; --map-water-line: #415A77;
   --shadow: 0 1px 0 rgba(13,27,42,.12), 0 8px 24px -12px rgba(13,27,42,.28);
@@ -12,14 +12,14 @@
 :root[data-theme="dark"] {
   --bg: #0D1B2A; --paper: #1B263B; --paper-2: #415A77; --ink: #F4F1DE; --ink-2: #D4C4A8; --ink-3: #778D7A;
   --line: #415A77; --line-2: #778D7A; --brand: #0D1B2A; --water: #415A77; --water-2: #778D7A;
-  --normal: #778D7A; --attention: #D4C4A8; --risk: #415A77; --flood: #1B263B; --offline: #778D7A;
+  --normal: #2E8B57; --attention: #E0A800; --risk: #E56B2F; --flood: #C0392B; --offline: #7F8C8D;
   --map-sea: #0D1B2A; --map-muni: #1B263B; --map-cap: #1B263B; --map-line: #415A77; --map-lbl: #F4F1DE; --map-halo: #0D1B2A; --map-water: #415A77; --map-water-line: #778D7A;
   --shadow: 0 1px 0 rgba(13,27,42,.65), 0 10px 28px -12px rgba(0,0,0,.7); color-scheme: dark;
 }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
   --bg: #0D1B2A; --paper: #1B263B; --paper-2: #415A77; --ink: #F4F1DE; --ink-2: #D4C4A8; --ink-3: #778D7A;
   --line: #415A77; --line-2: #778D7A; --brand: #0D1B2A; --water: #415A77; --water-2: #778D7A;
-  --normal: #778D7A; --attention: #D4C4A8; --risk: #415A77; --flood: #1B263B; --offline: #778D7A;
+  --normal: #2E8B57; --attention: #E0A800; --risk: #E56B2F; --flood: #C0392B; --offline: #7F8C8D;
   --map-sea: #0D1B2A; --map-muni: #1B263B; --map-cap: #1B263B; --map-line: #415A77; --map-lbl: #F4F1DE; --map-halo: #0D1B2A; --map-water: #415A77; --map-water-line: #778D7A;
   --shadow: 0 1px 0 rgba(13,27,42,.65), 0 10px 28px -12px rgba(0,0,0,.7); color-scheme: dark; } }
 

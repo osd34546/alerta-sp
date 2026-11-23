@@ -52,7 +52,7 @@
       S.bolts.push({ t0: now, main, branches, life: 520 });
       // clarão com intensidade controlada, centrado no ponto do raio
       const px = (x1 / w * 100).toFixed(0), py = (y1 / h * 100).toFixed(0);
-      flash.style.background = 'radial-gradient(ellipse at ' + px + '% ' + py + '%, rgba(225,238,255,.95) 0%, rgba(170,200,240,.42) 32%, rgba(120,150,200,0) 72%)';
+      flash.style.background = 'radial-gradient(ellipse at ' + px + '% ' + py + '%, rgba(244,241,222,.95) 0%, rgba(212,196,168,.42) 32%, rgba(119,141,122,0) 72%)';
       if (flash.animate) {
         try {
           const a = flash.animate([{ opacity: 0 }, { opacity: .55, offset: .06 }, { opacity: .08, offset: .2 }, { opacity: .36, offset: .3 }, { opacity: 0 }], { duration: 620, easing: 'ease-out' });
@@ -83,13 +83,13 @@
           const rainSpeed = .55 + I * .75; d.y += d.v * rainSpeed * dt / h; d.x += d.v * S.wind * rainSpeed * dt / w; if (d.y > 1.04) { d.y = -.05; d.x = Math.random() * 1.1 - .1; spawn(d); } if (d.x > 1.05) d.x -= 1.15;
           const x = d.x * w, y = d.y * h; ctx.moveTo(x, y); ctx.lineTo(x - d.l * S.wind, y - d.l); any = true;
         }
-        if (any) { ctx.strokeStyle = layerFar ? 'rgba(200,222,240,' + (.22 * Math.min(1, I * 1.3)).toFixed(3) + ')' : 'rgba(225,238,250,' + (.5 * Math.min(1, I * 1.2)).toFixed(3) + ')'; ctx.stroke(); }
+        if (any) { ctx.strokeStyle = layerFar ? 'rgba(119,141,122,' + (.22 * Math.min(1, I * 1.3)).toFixed(3) + ')' : 'rgba(244,241,222,' + (.5 * Math.min(1, I * 1.2)).toFixed(3) + ')'; ctx.stroke(); }
       }
       // ondulações onde a chuva toca o chão
       ctx.lineWidth = 1;
       for (let i = S.ripples.length - 1; i >= 0; i--) {
         const r = S.ripples[i], a = (now - r.t) / r.life; if (a >= 1) { S.ripples.splice(i, 1); continue; }
-        ctx.strokeStyle = 'rgba(205,228,245,' + ((1 - a) * .38 * Math.min(1, I * 1.4)).toFixed(3) + ')'; ctx.beginPath(); ctx.ellipse(r.x, r.y, 2 + a * r.r, (2 + a * r.r) * .42, 0, 0, 6.283); ctx.stroke();
+        ctx.strokeStyle = 'rgba(119,141,122,' + ((1 - a) * .38 * Math.min(1, I * 1.4)).toFixed(3) + ')'; ctx.beginPath(); ctx.ellipse(r.x, r.y, 2 + a * r.r, (2 + a * r.r) * .42, 0, 0, 6.283); ctx.stroke();
       }
       if (!S.paused && S.target > 0 && S.ripples.length < 34 * S.scale) { const c = Math.random() < I * 24 * dt ? 1 : 0; for (let i = 0; i < c; i++) S.ripples.push({ x: Math.random() * w, y: Math.random() * h, r: rand(9, 20), life: rand(520, 900), t: now }); }
       // raios: só com chuva forte e sem pausa
@@ -98,7 +98,7 @@
         const b = S.bolts[i], a = (now - b.t0) / b.life; if (a >= 1) { S.bolts.splice(i, 1); continue; }
         const env = a < .08 ? 1 : a < .18 ? .25 : a < .3 ? .9 : Math.max(0, .5 * (1 - (a - .3) / .7));
         const power = .48 + clamp((S.target - .62) / .38, 0, 1) * .52;
-        const draw = (pts, k) => { ctx.beginPath(); pts.forEach((p, j) => j ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1])); ctx.lineJoin = 'round'; ctx.strokeStyle = 'rgba(150,185,255,' + (.14 * env * k * power).toFixed(3) + ')'; ctx.lineWidth = 9 * k; ctx.stroke(); ctx.strokeStyle = 'rgba(190,215,255,' + (.4 * env * k * power).toFixed(3) + ')'; ctx.lineWidth = 3.2 * k; ctx.stroke(); ctx.strokeStyle = 'rgba(255,255,255,' + (.95 * env * power).toFixed(3) + ')'; ctx.lineWidth = 1.5 * k; ctx.stroke(); };
+        const draw = (pts, k) => { ctx.beginPath(); pts.forEach((p, j) => j ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1])); ctx.lineJoin = 'round'; ctx.strokeStyle = 'rgba(65,90,119,' + (.14 * env * k * power).toFixed(3) + ')'; ctx.lineWidth = 9 * k; ctx.stroke(); ctx.strokeStyle = 'rgba(212,196,168,' + (.4 * env * k * power).toFixed(3) + ')'; ctx.lineWidth = 3.2 * k; ctx.stroke(); ctx.strokeStyle = 'rgba(244,241,222,' + (.95 * env * power).toFixed(3) + ')'; ctx.lineWidth = 1.5 * k; ctx.stroke(); };
         draw(b.main, 1); b.branches.forEach(br => draw(br, .55));
       }
       ensureLoop();

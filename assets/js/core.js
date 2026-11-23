@@ -18,12 +18,12 @@
     alertCooldownMs: 6000,   // mesmo sensor + mesmo nível não repete dentro deste prazo
     rain: { light: 8, heavy: 45, storm: 55 },
     levels: [
-      { key: 'normal',    max: 30,       label: 'Normal',     rank: 0, color: '#3c9a6b', risk: 'Baixo',         text: 'Nível da água dentro da faixa normal.' },
-      { key: 'attention', max: 60,       label: 'Atenção',    rank: 1, color: '#e0a800', risk: 'Moderado',      text: 'Nível elevado. Acompanhe a evolução.' },
-      { key: 'risk',      max: 90,       label: 'Risco',      rank: 2, color: '#e5701a', risk: 'Alto',          text: 'Nível de risco elevado. Monitore as condições.' },
-      { key: 'flood',     max: Infinity, label: 'Alagamento', rank: 3, color: '#d03a2c', risk: 'Crítico',       text: 'Nível crítico atingido.' }
+      { key: 'normal',    max: 30,       label: 'Normal',     rank: 0, color: '#778D7A', risk: 'Baixo',         text: 'Nível da água dentro da faixa normal.' },
+      { key: 'attention', max: 60,       label: 'Atenção',    rank: 1, color: '#D4C4A8', risk: 'Moderado',      text: 'Nível elevado. Acompanhe a evolução.' },
+      { key: 'risk',      max: 90,       label: 'Risco',      rank: 2, color: '#415A77', risk: 'Alto',          text: 'Nível de risco elevado. Monitore as condições.' },
+      { key: 'flood',     max: Infinity, label: 'Alagamento', rank: 3, color: '#1B263B', risk: 'Crítico',       text: 'Nível crítico atingido.' }
     ],
-    offline: { key: 'offline', label: 'Sem sinal', rank: -1, color: '#7d8a86', risk: 'Indeterminado', text: 'Sensor sem comunicação.' }
+    offline: { key: 'offline', label: 'Sem sinal', rank: -1, color: '#778D7A', risk: 'Indeterminado', text: 'Sensor sem comunicação.' }
   };
   const LEVEL = Object.fromEntries(CFG.levels.concat(CFG.offline).map(l => [l.key, l]));
   const clamp = (v, a, b) => Math.max(a, Math.min(b, v));

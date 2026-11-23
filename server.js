@@ -9,7 +9,7 @@ const DATA_FILE = path.join(ROOT, 'reports.json');
 const MAX_BODY = 16 * 1024;
 
 // Só estes arquivos podem ser baixados (o resto, como server.js e reports.json, fica protegido).
-const PUBLIC = [/^\/(index|report)\.html$/, /^\/(styles\.css|script\.js|favicon\.svg)$/, /^\/assets\/(js|data)\/[\w.-]+\.js$/, /^\/assets\/img\/equipe\/[\w.-]+\.(?:jpe?g|png|webp)$/i];
+const PUBLIC = [/^\/(index|report)\.html$/, /^\/(styles\.css|script\.js|favicon\.svg)$/, /^\/assets\/(js|data)\/[\w.-]+\.js$/, /^\/assets\/img\/(?:equipe\/)?[\w.-]+\.(?:jpe?g|png|webp)$/i];
 const TYPES = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.svg': 'image/svg+xml', '.json': 'application/json; charset=utf-8', '.woff2': 'font/woff2', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.png': 'image/png', '.webp': 'image/webp' };
 const CSP = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'";
 const SECURITY = { 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'same-origin', 'Content-Security-Policy': CSP };
